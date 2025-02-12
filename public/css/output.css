@@ -458,6 +458,33 @@
     display: block;
     vertical-align: middle;
   }
+  input[type="file"]{
+    display: none;
+
+  }
+  #submit-button{
+    margin-top: 20px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border: royalblue;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  #custom-file-upload{
+    margin-top: 20px;
+    background-color: white;
+    height: 40px;
+    width: 100px;
+    top: 20px;
+    color: black;
+    text-align: center;
+    border: royalblue;
+    border-radius: 5px;
+    padding: 1px;
+
+
+  }
   img, video {
     max-width: 100%;
     height: auto;
@@ -1419,8 +1446,11 @@
   .bg-\[var\(--my_variable\)\] {
     background-color: var(--my_variable);
   }
-  .bg-gray-100 {
-    background-color: var(--color-gray-100);
+  .bg-black {
+    background-color: var(--color-black);
+  }
+  .bg-blue-50 {
+    background-color: var(--color-blue-50);
   }
   .bg-red-500 {
     background-color: var(--color-red-500);
@@ -1600,9 +1630,6 @@
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }
-  .p-4 {
-    padding: calc(var(--spacing) * 4);
-  }
   .text-center {
     text-align: center;
   }
@@ -1732,6 +1759,9 @@
   }
   .text-blue-600 {
     color: var(--color-blue-600);
+  }
+  .text-white {
+    color: var(--color-white);
   }
   .capitalize {
     text-transform: capitalize;

@@ -5,11 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes App</title>
-  <!-- Link the compiled Tailwind CSS (we'll generate this next) -->
   <link rel="stylesheet" href="/css/output.css">
 </head>
-<body class="bg-gray-100 p-4">
+<body class="bg-black">
   <h1 class="text-2xl font-bold text-center text-blue-600">Welcome to Notes App</h1>
-  <p class="text-center mt-4">This is your starting page.</p>
+  <p class="text-center mt-4 text-white">This is your starting page.</p>
+  <form class="flex flex-col justify-center items-center text-white" action="/upload" method = "POST" enctype = "multipart/form-data">
+    <label id = "custom-file-upload" for="fileInput">Upload files:</label>
+    <input type="file" id="fileInput" name = "files" multiple>
+    <button id="submit-button" type="submit">Submit</button>
+  </form>
 </body>
 </html>
