@@ -8,12 +8,60 @@
   <link rel="stylesheet" href="/css/output.css">
 </head>
 <body class="bg-black">
-  <h1 class="text-2xl font-bold text-center text-blue-600">Welcome to Notes App</h1>
+
+  <h1 class="mt-80 text-2xl font-bold text-center text-blue-600">Welcome to Notes App</h1>
   <p class="text-center mt-4 text-white">This is your starting page.</p>
-  <form class="flex flex-col justify-center items-center text-white" action="/upload" method = "POST" enctype = "multipart/form-data">
-    <label id = "custom-file-upload" for="fileInput">Upload files:</label>
+  <form class="flex flex-col justify-center items-center text-white" id = "uploadForm" action="/upload" method = "POST" enctype = "multipart/form-data">
+    <label class="mt-4"id = "custom-file-upload" for="fileInput">Upload files:</label>
     <input type="file" id="fileInput" name = "files" multiple>
-    <button id="submit-button" type="submit">Submit</button>
+    <button class="mt-4 border-2 border-blue-600 border-solid rounded-md bg-white text-black"  id="submit-button" type="submit">Submit</button>
   </form>
+
+
+
+
+  <div id="result" class="mt-40 text-9xl text-center text-white"></div>
+
+    <div id ="pictures"class="hidden grid grid-cols-3 justify-center place-items-center mt-10">
+        <img class="w-[350px] h-auto transform rotate-270" src="/images/IMG1.JPG" id="image_one">
+        <img class="w-[400px] h-auto" src="/images/IMG2.JPG" id="image_two">
+        <img class="w-[400px] h-auto" src="/images/IMG3.JPG" id="image_three">
+    </div>
+
+  
+
+
+
+  <!--Script for ajax-->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('uploadForm');
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+  
+        // Sending the request
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+          });
+  
+          if (!response.ok) {
+            throw new Error('Network response had an error');
+          }
+  
+          const resultText = await response.text();
+          document.getElementById('result').innerText = resultText;
+          document.getElementById('pictures').classList.remove("hidden");
+        } catch (error) {
+          console.error('Error during form submission:', error);
+          document.getElementById('result').innerText = 'Error processing your file.';
+        }
+      });
+    });
+  </script>
+  
+
 </body>
 </html>

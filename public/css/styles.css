@@ -1,2 +1,17 @@
 @import "tailwindcss";
 @tailwind utilities;
+
+#custom-file-upload{
+    width: 200px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+
+#fileInput{
+    display: none;
+}

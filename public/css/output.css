@@ -458,33 +458,6 @@
     display: block;
     vertical-align: middle;
   }
-  input[type="file"]{
-    display: none;
-
-  }
-  #submit-button{
-    margin-top: 20px;
-    background-color: white;
-    color: black;
-    text-align: center;
-    border: royalblue;
-    border-radius: 5px;
-    padding: 5px;
-  }
-  #custom-file-upload{
-    margin-top: 20px;
-    background-color: white;
-    height: 40px;
-    width: 100px;
-    top: 20px;
-    color: black;
-    text-align: center;
-    border: royalblue;
-    border-radius: 5px;
-    padding: 1px;
-
-
-  }
   img, video {
     max-width: 100%;
     height: auto;
@@ -556,6 +529,9 @@
   }
   .pointer-events-none {
     pointer-events: none;
+  }
+  .\!visible {
+    visibility: visible !important;
   }
   .collapse {
     visibility: collapse;
@@ -722,6 +698,15 @@
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
+  }
+  .mt-40 {
+    margin-top: calc(var(--spacing) * 40);
+  }
+  .mt-80 {
+    margin-top: calc(var(--spacing) * 80);
+  }
   .box-border {
     box-sizing: border-box;
   }
@@ -809,6 +794,9 @@
   .aspect-square {
     aspect-ratio: 1 / 1;
   }
+  .h-auto {
+    height: auto;
+  }
   .h-screen {
     height: 100vh;
   }
@@ -823,6 +811,12 @@
   }
   .w-1\/2 {
     width: calc(1/2 * 100%);
+  }
+  .w-\[350px\] {
+    width: 350px;
+  }
+  .w-\[400px\] {
+    width: 400px;
   }
   .w-screen {
     width: 100vw;
@@ -945,6 +939,9 @@
   }
   .scale-none {
     scale: none;
+  }
+  .rotate-270 {
+    rotate: 270deg;
   }
   .rotate-none {
     rotate: none;
@@ -1072,6 +1069,9 @@
   }
   .auto-rows-min {
     grid-auto-rows: min-content;
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .grid-cols-none {
     grid-template-columns: none;
@@ -1323,6 +1323,9 @@
   .rounded {
     border-radius: 0.25rem;
   }
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
   .rounded-s {
     border-start-start-radius: 0.25rem;
     border-end-start-radius: 0.25rem;
@@ -1374,6 +1377,10 @@
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
   }
   .border-x {
     border-inline-style: var(--tw-border-style);
@@ -1431,6 +1438,9 @@
     --tw-border-style: solid;
     border-style: solid;
   }
+  .border-blue-600 {
+    border-color: var(--color-blue-600);
+  }
   .bg-\(--my_variable\) {
     background-color: var(--my_variable);
   }
@@ -1449,9 +1459,6 @@
   .bg-black {
     background-color: var(--color-black);
   }
-  .bg-blue-50 {
-    background-color: var(--color-blue-50);
-  }
   .bg-red-500 {
     background-color: var(--color-red-500);
   }
@@ -1460,6 +1467,9 @@
   }
   .bg-red-500\/\[50\%\] {
     background-color: color-mix(in oklab, var(--color-red-500) 50%, transparent);
+  }
+  .bg-white {
+    background-color: var(--color-white);
   }
   .-bg-conic {
     --tw-gradient-position: in oklab;
@@ -1676,6 +1686,10 @@
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
   }
+  .text-9xl {
+    font-size: var(--text-9xl);
+    line-height: var(--tw-leading, var(--text-9xl--line-height));
+  }
   .leading-none {
     --tw-leading: 1;
     line-height: 1;
@@ -1756,6 +1770,9 @@
   }
   .\[color\:red\]\/50\! {
     color: color-mix(in oklab, red 50%, transparent) !important;
+  }
+  .text-black {
+    color: var(--color-black);
   }
   .text-blue-600 {
     color: var(--color-blue-600);
@@ -2115,6 +2132,12 @@
   .\[keywords\:node-addon-api\] {
     keywords: node-addon-api;
   }
+  .\[options\:IParseOptions\] {
+    options: IParseOptions;
+  }
+  .\[root\:Root\] {
+    root: Root;
+  }
   .backface-hidden {
     backface-visibility: hidden;
   }
@@ -2206,6 +2229,18 @@
   .transform-view {
     transform-box: view-box;
   }
+}
+#custom-file-upload {
+  width: 200px;
+  height: 40px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  border: 2px solid blue;
+  border-radius: 5px;
+}
+#fileInput {
+  display: none;
 }
 @keyframes spin {
   to {
