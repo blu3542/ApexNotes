@@ -43,7 +43,24 @@
 
 
 
-    <div id="result" class="mt-40 text-2xl text-center text-white"></div>
+    <div id="resultWrapper" class="mt-10 w-[1200px] h-[600px] bg-gradient-to-b from-blue-600 to-blue-700 rounded-2xl relative block mx-auto mb-10 flex flex-col justify-between overflow-hidden">
+        <!-- The result container now expands and centers its content -->
+        <div id="progressContainer" class="w-full bg-gray-300 h-[4px] hidden">
+            <div id="progressBar" class="bg-blue-600 h-20" style="width: 0%;"></div>
+        </div>
+        <div id="result" class="flex-grow flex flex-col items-center justify-center text-2xl text-center text-white">
+            
+          <!-- Output text goes here -->
+        </div>
+        <!-- The pagination controls at the bottom -->
+        <div id="pagination" class="hidden mt-4 text-center text-white">
+          <button id="prevBtn" class="px-4 py-2 mb-2 bg-gray-700 text-white rounded">Prev</button>
+          <span id="pageInfo" class="mx-4 mb-2 text-white"></span>
+          <button id="nextBtn" class="px-4 py-2 mb-2 bg-gray-700 text-white rounded">Next</button>
+        </div>
+      </div>
+      
+      
 
    
 
@@ -58,6 +75,22 @@
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const formData = new FormData(form);
+
+        // Show the progress bar
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        progressContainer.classList.remove('hidden');
+        progressBar.style.width = '0%';
+        
+        // Start a simulated progress increment
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            // Increase progress up to 90% before the API call completes
+            if (progress < 90) {
+            progress += 10;
+            progressBar.style.width = progress + '%';
+            }
+        }, 300);
   
         // Sending the request
         try {
@@ -71,6 +104,10 @@
           }
   
           const resultText = await response.text();
+          //make progress go to 100% before paginating results
+          clearInterval(progressInterval);
+          progressBar.style.width = '100%';
+          
           paginateResults(resultText);
           //document.getElementById('result').innerText = resultText;
         } catch (error) {
@@ -89,20 +126,17 @@
   
     // Create or update pagination controls if not already present
     let paginationContainer = document.getElementById('pagination');
-    if (!paginationContainer) {
-      paginationContainer = document.createElement('div');
-      paginationContainer.id = 'pagination';
-      paginationContainer.className = 'mt-4 text-center';
-      document.body.appendChild(paginationContainer);
-    }
+   
   
     // Set up pagination buttons and page info HTML
-    paginationContainer.innerHTML = `
+    /*paginationContainer.innerHTML = `
       <button id="prevBtn" class="px-4 py-2 bg-gray-700 text-white rounded">Prev</button>
       <span id="pageInfo" class="mx-4 text-white"></span>
       <button id="nextBtn" class="px-4 py-2 bg-gray-700 text-white rounded">Next</button>
     `;
-  
+    */
+    
+    paginationContainer.classList.remove('hidden');
     const resultDiv = document.getElementById('result');
   
     // Function to display a specific page of results
