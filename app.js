@@ -1,4 +1,5 @@
 // app.js
+const { VertexAI , HarmCategory, HarmBlockThreshold} = require('@google-cloud/vertexai');
 const express = require('express');
 const multer = require('multer');
 const upload = multer({dest:'uploads/'});
@@ -28,27 +29,58 @@ app.post('/upload', upload.array('files', 10), async (req,res) =>{
 
   try{
       //confirmation of file upload + extraction
-      console.log('Files received:', req.files);
+      //console.log('Files received:', req.files);
       //res.send('Multiple files uploaded');
       const filePaths = req.files.map(file => file.path);
-      console.log('Processing file: ', filePaths[0]);
+      //console.log('Processing file: ', filePaths[0]);
   
       //extract the text from the uploaded file
       //# only using first file for testing purposes
       const extractedText = await extractText(filePaths[0]);
-      console.log('Hey Ben This is the final extracted text:', extractedText);
+      //console.log('Hey Ben This is the final extracted text:', extractedText);
   
 
-      //summarize the test
+      //summarize the text
+      const summarizedNotes = await summarizeText(extractedText);
 
       //render the result
-      res.send(extractedText);
+      res.send(summarizedNotes);
 
   } catch (error){
     console.error('Error during file processing: ', error);
     res.status(500).send('Error');
   }
 });
+
+
+//Instantiate Gemini models
+
+const project = 'notesbyblu';
+const location = 'us-central1';
+const textModel =  'gemini-1.0-pro';
+const vertexAI = new VertexAI({project: project, location: location});
+
+// Instantiate Gemini models
+const generativeModel = vertexAI.getGenerativeModel({
+    model: textModel,
+    // The following parameters are optional
+    // They can also be passed to individual content generation requests
+    safetySettings: [{category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE}],
+    generationConfig: {maxOutputTokens: 256},
+    systemInstruction: {
+      role: 'system',
+      parts: [{"text": `For example, you are a helpful customer service agent.`}]
+    },
+});
+
+
+const generativeModelPreview = vertexAI.preview.getGenerativeModel({
+    model: textModel,
+});
+
+
+
+
 
 async function extractText(uploadedFilePath){
 
@@ -145,7 +177,26 @@ async function quickstart(projectId, location, processorId, filePath) {
 };
 
 
-async function summarizeText(text){
-  //call to LLM
-}
+async function summarizeText(transcribedText){
+  //call to Gemini LLM
+  let prompt = "I am tutoring a student. Use these pieces of text that OCR technology pulled to generate a summary of key concepts along with practice problems. Make sure to filter out random phrases that seem to be unrelated to the topic: " + transcribedText
+
+  const request = {
+    contents:[{role: 'user', parts: [{text: prompt}]}]
+  };
+
+  const result = await generativeModel.generateContent(request);
+  const response = result.response;
+  // console.log('Response: ', JSON.stringify(response));
+  responseText = JSON.stringify(response)
+  responseText = response.candidates[0].content.parts[0].text;
+
+  return responseText;
+};
+
+
+
+
+
+
 
