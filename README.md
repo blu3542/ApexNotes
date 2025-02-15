@@ -26,7 +26,7 @@ Ensure you have the following installed:
 - https://docs.google.com/document/d/1ToY0A_XyQo9bweyhIWZW4joD-WQolPPDOkX2kA5AmfI/edit?usp=sharing
 
 ### Clone the Repository
-git clone https://github.com/your-username/apex-notes.git cd apex-notes
+git clone https://github.com/your-username/ApexNotes.git cd ApexNotes
 
 ### Install Dependencies
 npm install
