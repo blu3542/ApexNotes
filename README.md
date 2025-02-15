@@ -8,14 +8,15 @@ Features
 🔄 Pagination for results – Navigate through multiple pages of extracted content.
 📊 Progress bar & animations – Provides a smooth user experience with loading indicators.
 🎨 Modern UI – Built with Tailwind CSS for a sleek and responsive interface.
+
 Installation & Setup
 Prerequisites
 Ensure you have the following installed:
 
-Node.js (LTS version recommended)
-npm or Yarn
+Node.js 
+npm
 Google Cloud credentials with Document AI API access
-An API key for Vertex AI (Gemini AI)
+An API key for Vertex AI
 Clone the Repository
 sh
 Copy
