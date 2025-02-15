@@ -1,4 +1,3 @@
-# NotesByBlu
 Apex Notes
 Apex Notes is an AI-powered tool that transforms handwritten notes into concise summaries and practice problems, making tutoring sessions more effective and efficient. This application leverages Google Cloud Document AI for text extraction and Gemini AI for summarization, streamlining the learning process for students and educators alike.
 
