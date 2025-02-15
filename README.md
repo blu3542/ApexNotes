@@ -22,7 +22,8 @@ Ensure you have the following installed:
 - [npm]
 - Google Cloud credentials with **Document AI API access**
 - An API key for **Vertex AI (Gemini AI)**
-- Guided instructions (with photos) on installation for Google Cloud and Vertex AI
+- Guided instructions (with photos) on installation for Google Cloud and Vertex AI:
+- https://docs.google.com/document/d/1ToY0A_XyQo9bweyhIWZW4joD-WQolPPDOkX2kA5AmfI/edit?usp=sharing
 
 ### Clone the Repository
 git clone https://github.com/your-username/apex-notes.git cd apex-notes
