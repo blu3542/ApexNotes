@@ -33,11 +33,11 @@ npm install
 
 ### Set Up Environment Variables
 Create a `.env` file in the root directory and add the following:
-PORT=3000 (default set to 3000)
-GOOGLE_CLOUD_PROJECT_ID=your-project-id
-GOOGLE_CLOUD_LOCATION=us-central1
-GOOGLE_CLOUD_PROCESSOR_ID=your-processor-id
-TEXT_MODEL=gemini-1.0-pro (default model used in this application)
+- PORT=3000 (default set to 3000)
+- GOOGLE_CLOUD_PROJECT_ID=your-project-id
+- GOOGLE_CLOUD_LOCATION=us-central1
+- GOOGLE_CLOUD_PROCESSOR_ID=your-processor-id
+- TEXT_MODEL=gemini-1.0-pro (default model used in this application)
 
 ## Usage
 
