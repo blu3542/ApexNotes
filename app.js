@@ -80,7 +80,7 @@ async function extractText(uploadedFilePath){
   try {
    
     const myProjectId = process.env.GOOGLE_CLOUD_PROJECT_ID;
-    const myLocation = process.env.GOOGLE_CLOUD_LOCATION; // Format is 'us' or 'eu'
+    const myLocation = 'us'; // Format is 'us' or 'eu'
     const myProcessorId = process.env.GOOGLE_CLOUD_PROCESSOR_ID; // Create processor in Cloud Console
 
     return await quickstart(myProjectId, myLocation, myProcessorId, uploadedFilePath);
