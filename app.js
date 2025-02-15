@@ -1,4 +1,5 @@
-// app.js
+require('dotenv').config(); // Load environment variables
+
 const { VertexAI , HarmCategory, HarmBlockThreshold} = require('@google-cloud/vertexai');
 const express = require('express');
 const multer = require('multer');
@@ -17,12 +18,10 @@ app.get('/', async(req, res) => {
   res.render('index');
 });
 
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
 
 //route for file upload and subsequent processing
 app.post('/upload', upload.array('files', 10), async (req,res) =>{
@@ -33,12 +32,11 @@ app.post('/upload', upload.array('files', 10), async (req,res) =>{
       //res.send('Multiple files uploaded');
       const filePaths = req.files.map(file => file.path);
       //console.log('Processing file: ', filePaths[0]);
-  
+
       //extract the text from the uploaded file
       //# only using first file for testing purposes
       const extractedText = await extractText(filePaths[0]);
       //console.log('Hey Ben This is the final extracted text:', extractedText);
-  
 
       //summarize the text
       const summarizedNotes = await summarizeText(extractedText);
@@ -52,12 +50,10 @@ app.post('/upload', upload.array('files', 10), async (req,res) =>{
   }
 });
 
-
 //Instantiate Gemini models
-
-const project = 'notesbyblu';
-const location = 'us-central1';
-const textModel =  'gemini-1.0-pro';
+const project = process.env.GOOGLE_CLOUD_PROJECT_ID;
+const location = process.env.GOOGLE_CLOUD_LOCATION;
+const textModel = process.env.TEXT_MODEL;
 const vertexAI = new VertexAI({project: project, location: location});
 
 // Instantiate Gemini models
@@ -73,34 +69,25 @@ const generativeModel = vertexAI.getGenerativeModel({
     },
 });
 
-
 const generativeModelPreview = vertexAI.preview.getGenerativeModel({
     model: textModel,
 });
 
-
-
-
-
 async function extractText(uploadedFilePath){
 
     //call to OCR API
-  
+
   try {
    
-    const myProjectId = 'notesbyblu';
-    const myLocation = 'us'; // Format is 'us' or 'eu'
-    const myProcessorId = '55c6d57100d53657'; // Create processor in Cloud Console
-   
-
+    const myProjectId = process.env.GOOGLE_CLOUD_PROJECT_ID;
+    const myLocation = process.env.GOOGLE_CLOUD_LOCATION; // Format is 'us' or 'eu'
+    const myProcessorId = process.env.GOOGLE_CLOUD_PROCESSOR_ID; // Create processor in Cloud Console
 
     return await quickstart(myProjectId, myLocation, myProcessorId, uploadedFilePath);
   } catch (error){
       console.error('Error occured: ', error);
       throw error;
     }
-  
-
 };
 
 //worker function for the text extraction via Google Cloud Document AI
@@ -154,8 +141,6 @@ async function quickstart(projectId, location, processorId, filePath) {
       return text.substring(startIndex, endIndex);
     };
 
-    
-
     // Read the text recognition output from the processor
     //console.log('The document contains the following paragraphs:');
     const [page1] = document.pages;
@@ -176,10 +161,9 @@ async function quickstart(projectId, location, processorId, filePath) {
   }
 };
 
-
 async function summarizeText(transcribedText){
   //call to Gemini LLM
-  let prompt = "I am tutoring a student. Use these pieces of text that OCR technology pulled to generate a summary of key concepts along with practice problems. Make sure to filter out random phrases that seem to be unrelated to the topic: " + transcribedText
+  let prompt = "I am tutoring a student. Use these pieces of text that OCR technology pulled to generate a summary of key concepts along with practice problems. Make sure to filter out random phrases that seem to be unrelated to the topic: " + transcribedText;
 
   const request = {
     contents:[{role: 'user', parts: [{text: prompt}]}]
@@ -188,15 +172,10 @@ async function summarizeText(transcribedText){
   const result = await generativeModel.generateContent(request);
   const response = result.response;
   // console.log('Response: ', JSON.stringify(response));
-  responseText = JSON.stringify(response)
+  responseText = JSON.stringify(response);
   responseText = response.candidates[0].content.parts[0].text;
 
   return responseText;
 };
 
-
-
-
-
-
-
+module.exports = app;
