@@ -4,6 +4,10 @@ Apex Notes is an AI-powered tool that transforms handwritten notes into concise 
 
 ---
 
+## Review from Apex Academy
+
+Attached in this repository is a written review from Apex Notes first User, Benjamin Lee, founder and head tutor of Apex Academy, a prestigious tutoring agency in Brea, Ca.
+
 ## Features
 
 - 📸 **Upload handwritten notes** – Accepts image uploads for processing.
