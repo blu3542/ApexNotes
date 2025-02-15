@@ -7,13 +7,16 @@
 }
 
 #custom-file-upload{
-    width: 200px;
-    height: 40px;
-    background-color: white;
-    color: black;
-    text-align: center;
-    border: 2px solid blue;
-    border-radius: 5px;
+    margin-top: 100px;         
+    border-radius: 2rem;         
+    background-color: #ffffff;   
+    display: block;            
+    margin-left: auto;         
+    margin-right: auto;         
+    padding: 1rem 2rem;         /* py-4 (1rem top & bottom) and px-8 (2rem left & right) */
+    font-size: 1.25rem;         
+    color: #000000;             
+    cursor: pointer; 
 }
 
 
@@ -34,3 +37,16 @@
 }
 
 
+#resultWrapper::before {
+    content: "";
+    position: absolute;
+    top: -25%;
+    left: -25%;
+    width: 150%;
+    height: 150%;
+    background: conic-gradient(#001f3f 0%, #0074D9 33%, #7FDBFF 66%, #001f3f 100%);
+    filter: blur(1.5rem) brightness(1.3);
+    animation: border-spin 4s infinite ease-in-out;
+
+   
+  }

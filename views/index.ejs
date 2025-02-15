@@ -13,18 +13,20 @@
     <h1 class="mt-4 text-2xl font-bold text-center text-blue-600">Apex Notes</h1>
     <p class="text-center text-7xl mt-20 text-white">Don't make tutoring harder than it needs to be</p>
     <p class="text-center text-2xl mt-20 text-white">We help create lesson summaries and homework problems for your student as easy as taking a photo</p>
-    <button class = "mt-2 rounded-4xl bg-white block mx-auto p-2 " >Try it out</button>
+    <button id="tryButton" class = "mt-6 rounded-4xl bg-white block mx-auto px-8 py-4 text-xl cursor-pointer" >Try it out</button>
 
     <div class="mt-10 w-[1200px] h-[600px] card-wrapper relative block mx-auto rounded-2xl overflow-hidden bg-white group"> 
         <div class="card-content absolute top-[4px] left-[4px] w-[1192px] h-[592px] rounded-2xl bg-gradient-to-b from-blue-600 to-blue-700">
-          <h2 class="text-center text-white text-5xl translate-y-[200px] group-hover:translate-y-10 transition-all duration-500 ease-in-out">Our Mission</h2>
-          <h2 class="text-center text-white text-2xl mt-4 translate-y-[200px] group-hover:opacity-0 group-hover:translate-y-10 transition-transition-all duration-500 ease-in-out">Hover on Me!</h2>
+          <h2 class="text-center text-white text-5xl translate-y-[250px] group-hover:translate-y-10 transition-all duration-500 ease-in-out">Our Mission</h2>
+          <h2 class="text-center text-white text-2xl mt-4 translate-y-[250px] group-hover:opacity-0 group-hover:translate-y-10 transition-transition-all duration-500 ease-in-out">Hover on Me!</h2>
 
-          <p class="opacity-0 mt-8 text-center text-white group-hover:opacity-100 transition-all duration-500 ease-in-out">Deliver summarized notes and practice problems as simple as possible</p>
-          <p class="opacity-0 mt-8 text-center text-white group-hover:opacity-100 transition-all duration-500 ease-in-out">Notes we take in class aren't perfect. They're rushed, 
-          our messy handwriting or typos make them hard to read after, and seeing the bigger picture behind the notes is difficult to see. 
-          To make this process easier, Apex Notes takes your pictures, processes them with Computer Vision and AI models, and voila: 
-          A summary of key concepts and practice problems to engrain them into your student's mind is generated</p>
+          <p class="opacity-0 mt-16 font-bold text-2xl text-center text-white group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+            Get concise summaries and practice problems with ease.
+          </p>
+          <p class="opacity-0 mt-8 text-lg text-center text-white group-hover:opacity-100 transition-opacity duration-500 ease-in-out max-w-3xl mx-auto">
+            Classroom notes can be messy and rushed—full of typos and incomplete details. Apex Notes processes your photos with advanced Computer Vision and AI, delivering clear summaries of key concepts and targeted practice problems to help your student master the material.
+          </p>
+          
         </div>
     </div>
       
@@ -33,30 +35,33 @@
 
 
     <!-- replace hidden with flex -->
-    <form class="flex flex-col justify-center items-center text-white" id = "uploadForm" action="/upload" method = "POST" enctype = "multipart/form-data">
-        <label class="mt-4"id = "custom-file-upload" for="fileInput">Upload files:</label>
-        <input type="file" id="fileInput" name = "files" multiple>
-        <button class="mt-4 border-2 border-blue-600 border-solid rounded-md bg-white text-black"  id="submit-button" type="submit">Submit</button>
-    </form>
+    
 
 
+    <div id="resultWrapper" class="mt-10 w-[1200px] h-[600px] bg-white rounded-2xl relative block mx-auto mb-10 flex flex-col justify-between overflow-hidden group">
+        <div id="resultContent" class="absolute top-[4px] left-[4px] w-[1192px] h-[592px] rounded-2xl bg-gradient-to-b from-blue-600 to-blue-700 overflow-hidden">
 
-
-
-    <div id="resultWrapper" class="mt-10 w-[1200px] h-[600px] bg-gradient-to-b from-blue-600 to-blue-700 rounded-2xl relative block mx-auto mb-10 flex flex-col justify-between overflow-hidden">
-        <!-- The result container now expands and centers its content -->
-        <div id="progressContainer" class="w-full bg-gray-300 h-[4px] hidden">
-            <div id="progressBar" class="bg-blue-600 h-20" style="width: 0%;"></div>
-        </div>
-        <div id="result" class="flex-grow flex flex-col items-center justify-center text-2xl text-center text-white">
-            
-          <!-- Output text goes here -->
-        </div>
-        <!-- The pagination controls at the bottom -->
-        <div id="pagination" class="hidden mt-4 text-center text-white">
-          <button id="prevBtn" class="px-4 py-2 mb-2 bg-gray-700 text-white rounded">Prev</button>
-          <span id="pageInfo" class="mx-4 mb-2 text-white"></span>
-          <button id="nextBtn" class="px-4 py-2 mb-2 bg-gray-700 text-white rounded">Next</button>
+            <div id="progressContainer" class="w-full bg-gray-300 h-[10px] hidden">
+                <div id="progressBar" class="bg-blue-600 h-20" style="width: 0%;"></div>
+            </div>
+            <div id="hoverContainer" class="absolute left-[50%] top-[50%] transform -translate-x-1/2 -translate-y-1/2 text-white text-center text-5xl opacity-100 group-hover:opacity-0 transition-all duration-500 ease-in-out">Hover on me to try out Apex Notes!</div>
+            <form class="flex flex-col absolute left-[50%] top-[40%] transform -translate-x-1/2 -translate-y-1/2 justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out" id = "uploadForm" action="/upload" method = "POST" enctype = "multipart/form-data">
+                <label class="mt-4"id = "custom-file-upload" for="fileInput">Upload files:</label>
+                <input type="file" id="fileInput" name = "files" multiple>
+                <button class="mt-4  py-4 px-8 rounded-[2rem] bg-white text-black cursor-pointer"  id="submit-button" type="submit">Submit</button>
+            </form> 
+          
+            <div id="loadingContainer" class="absolute left-[50%] top-[50%] transform -translate-x-1/2 -translate-y-1/2 text-white text-center text-5xl hidden">Loading...</div>
+            <div id="result" class="flex-grow flex flex-col items-center justify-center text-2xl text-center text-white">
+                
+            <!-- Output text goes here -->
+            </div>
+            <!-- Pagination buttons at the bottom -->
+            <div id="pagination" class="hidden mt-4 text-center text-white">
+            <button id="prevBtn" class="px-4 py-2 mb-2 bg-gray-700 text-white rounded">Prev</button>
+            <span id="pageInfo" class="mx-4 mb-2 text-white"></span>
+            <button id="nextBtn" class="px-4 py-2 mb-2 bg-gray-700 text-white rounded">Next</button>
+            </div>
         </div>
       </div>
       
@@ -75,12 +80,17 @@
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const formData = new FormData(form);
+        form.classList.add('hidden');
+        const hoverContainer = document.getElementById('hoverContainer');
+        hoverContainer.classList.add('hidden');
 
         // Show the progress bar
         const progressContainer = document.getElementById('progressContainer');
         const progressBar = document.getElementById('progressBar');
         progressContainer.classList.remove('hidden');
         progressBar.style.width = '0%';
+        const loadingContainer = document.getElementById('loadingContainer');
+        loadingContainer.classList.remove('hidden');
         
         // Start a simulated progress increment
         let progress = 0;
@@ -107,6 +117,8 @@
           //make progress go to 100% before paginating results
           clearInterval(progressInterval);
           progressBar.style.width = '100%';
+          loadingContainer.classList.add('hidden');
+
           
           paginateResults(resultText);
           //document.getElementById('result').innerText = resultText;
@@ -120,7 +132,7 @@
     function paginateResults(text) {
     // Pages = # paragraphs / pageSize
     const paragraphs = text.split('\n').filter(line => line.trim() !== '');
-    const pageSize = 5; // Number of paragraphs per page
+    const pageSize = 5; 
     let currentPage = 1;
     const totalPages = Math.ceil(paragraphs.length / pageSize);
   
@@ -137,6 +149,7 @@
     */
     
     paginationContainer.classList.remove('hidden');
+    
     const resultDiv = document.getElementById('result');
   
     // Function to display a specific page of results
@@ -168,6 +181,19 @@
     // Display the first page initially
     displayPage(currentPage);
   }
+
+  //event listener to 
+  document.addEventListener('DOMContentLoaded', function() {
+    const tryItOutBtn = document.getElementById('tryButton');
+    const target = document.getElementById('resultWrapper'); 
+    
+    tryItOutBtn.addEventListener('click', function() {
+      // Scroll the target element into view smoothly
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+
   </script>
   
 
